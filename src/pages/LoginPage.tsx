@@ -19,7 +19,6 @@ export default function LoginPage() {
         setError("");
         setLoading(true);
         try {
-            // await getAccessTokenUsingClientId();
             window.localStorage.setItem("userType", username);
             if (username === "admin") {
                 navigate("/admin");

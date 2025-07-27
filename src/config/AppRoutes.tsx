@@ -3,9 +3,10 @@ import UserLayout from "../layouts/UserLayout.tsx";
 import AdminLayout from "../layouts/AdminLayout.tsx";
 import UnauthorizedPage from "../pages/UnauthorizedPage.tsx";
 import {UserHome} from "../pages/UserHome.tsx";
-import {AdminPage} from "../pages/AdminPage.tsx";
 import LoginPage from "../pages/LoginPage.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
+import AdminPage from "../pages/AdminPage.tsx";
+import DashboardLayout from "../layouts/DashboardLayout.tsx";
 
 
 const getUserType = () => localStorage.getItem("userType");
@@ -13,7 +14,7 @@ const getUserType = () => localStorage.getItem("userType");
 const AppRoutes = () => {
     const userType = getUserType();
     const routes = [
-        {path: "/", element: <LoginPage/>},
+        {path: "/", element: <DashboardLayout/>},
         {
             path: "/admin",
             element: userType === "admin" ? <AdminLayout/> : <Navigate to="/unauthorized"/>,
@@ -37,7 +38,8 @@ const AppRoutes = () => {
                 // Add more user routes here
             ]
         },
-        {path: "/unauthorized", element: <UnauthorizedPage/>}
+        {path: "/unauthorized", element: <UnauthorizedPage/>},
+        {path: "*", element: <p>404 Not Found</p>}
     ];
     return useRoutes(routes);
 };
