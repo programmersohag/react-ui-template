@@ -11,9 +11,19 @@ import {
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
+import {useLocation, useNavigate} from "react-router-dom";
+
 import React from "react";
 
 const AdminSidebar: React.FC = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const menuItems = [
+        {text: "Home", path: "/"},
+        {text: "Form", path: "/form"},
+        {text: "Table", path: "/table"}
+    ];
+
     return (
         <>
             {/* Removed backgroundColor here, relying on Drawer's background */}
@@ -25,15 +35,20 @@ const AdminSidebar: React.FC = () => {
             <Divider/>
             <List>
                 {/* ... rest of the list items */}
-                <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/">
-                        <ListItemIcon>
-                            <DashboardIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard"/>
-                    </ListItemButton>
-                </ListItem>
-                {/* ... */}
+                <List>
+                    {menuItems.map((item) => (
+                        <ListItemButton
+                            key={item.text}
+                            selected={location.pathname === item.path} // highlight active
+                            onClick={() => navigate(item.path)}
+                        >
+                            <ListItemIcon>
+                                <DashboardIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={item.text}/>
+                        </ListItemButton>
+                    ))}
+                </List>
             </List>
             <Divider/>
             <List>
