@@ -8,10 +8,20 @@ import {
     Typography,
     TextField,
 } from "@mui/material";
-import {useForm, type SubmitHandler} from "react-hook-form";
+import {useForm, type SubmitHandler, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+const getAge = (dob: Date) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+};
 // Step titles
 const steps = ["Personal Info", "Contact Info", "Review"];
 const schema = yup.object({
@@ -22,6 +32,15 @@ const schema = yup.object({
         .string()
         .matches(/^[0-9]{10,15}$/, "Phone must be 10–15 digits")
         .required("Phone is required"),
+    dob: yup
+        .date()
+        .transform((value, originalValue) => (originalValue === "" ? null : value))
+        .required("Date of Birth is required"),
+    motherName: yup.string().when("dob", {
+        is: (dob: Date) => getAge(new Date(dob)) <= 20, // condition
+        then: (schema) => schema.required("Mother name is required"), // validation if condition met
+        otherwise: (schema) => schema.notRequired(), // optional if age > 20
+    }),
 });
 /*// Validation schemas
 const personalInfoSchema = yup.object({
@@ -48,10 +67,11 @@ const stepFields: Record<number, (keyof FormData)[]> = {
 
 export default function MultiStepForm() {
     const [activeStep, setActiveStep] = useState(0);
-
     const {
         register,
         handleSubmit,
+        control,
+        watch,
         trigger,
         formState: {errors},
         getValues,
@@ -63,6 +83,8 @@ export default function MultiStepForm() {
             lastName: "",
             email: "",
             phone: "",
+            dob: undefined,
+            motherName: "",
         },
     });
 
@@ -71,7 +93,6 @@ export default function MultiStepForm() {
         const fieldsToValidate = stepFields[activeStep] ?? [];
         const valid = await trigger(fieldsToValidate);
         if (!valid) return;
-
         setActiveStep((prev) => prev + 1);
     };
 
@@ -104,6 +125,7 @@ export default function MultiStepForm() {
                         <TextField
                             label="First Name"
                             {...register("firstName")}
+                            value={watch("firstName") || ""}
                             error={!!errors.firstName}
                             helperText={errors.firstName?.message}
                             fullWidth
@@ -112,16 +134,39 @@ export default function MultiStepForm() {
                         <TextField
                             label="Last Name"
                             {...register("lastName")}
+                            value={watch("lastName") || ""}
                             error={!!errors.lastName}
                             helperText={errors.lastName?.message}
                             fullWidth
                             margin="normal"
+                        />
+                        <Controller
+                            name="dob"
+                            control={control}
+                            render={({field}) => (
+                                <TextField
+                                    {...field}
+                                    label="Date of Birth"
+                                    type="date"
+                                    fullWidth
+                                    margin="normal"
+                                    error={!!errors.dob}
+                                    helperText={errors.dob?.message}
+                                />
+                            )}
                         />
                     </>
                 );
             case 1:
                 return (
                     <>
+                        <TextField
+                            label="Mother Name"
+                            {...register("motherName")}
+                            error={!!errors.motherName}
+                            helperText={errors.motherName?.message}
+                            slotProps={{input: {readOnly: true}}}
+                        />
                         <TextField
                             label="Email"
                             {...register("email")}
