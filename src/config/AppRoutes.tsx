@@ -9,6 +9,8 @@ import DashboardLayout from "../layouts/DashboardLayout.tsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.tsx";
 import Form from "../pages/dashboard/Form.tsx";
 import AdvancedTable from "../pages/dashboard/Table.tsx";
+import LoginPage from "../pages/LoginPage.tsx";
+import MultiStepForm from "../pages/MultistepForm.tsx";
 
 const getUserType = () => localStorage.getItem("userType");
 
@@ -37,6 +39,12 @@ const AppRoutes = () => {
                             <AdvancedTable/>
                         </ProtectedRoute>
                     )
+                },{
+                    path: "/multi-step-form", element: (
+                        <ProtectedRoute roles={["admin"]}>
+                            <MultiStepForm/>
+                        </ProtectedRoute>
+                    )
                 },
             ]
         },
@@ -63,6 +71,7 @@ const AppRoutes = () => {
                 // Add more user routes here
             ]
         },
+        {path: "/login", element: <LoginPage/>},
         {path: "/unauthorized", element: <UnauthorizedPage/>},
         {path: "*", element: <p>404 Not Found</p>}
     ];

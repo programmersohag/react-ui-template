@@ -7,7 +7,6 @@ import {
     Toolbar,
     Typography,
     Divider,
-    Link,
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -21,7 +20,8 @@ const AdminSidebar: React.FC = () => {
     const menuItems = [
         {text: "Home", path: "/"},
         {text: "Form", path: "/form"},
-        {text: "Table", path: "/table"}
+        {text: "Table", path: "/table"},
+        {text: "Multi Step Form", path: "/multi-step-form"}
     ];
 
     return (

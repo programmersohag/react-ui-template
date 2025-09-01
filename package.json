@@ -1,5 +1,5 @@
 {
-  "name": "react-ui-template",
+  "name": "api-agent-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,6 +13,7 @@
     "@date-io/dayjs": "^3.2.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.2.1",
     "@mui/icons-material": "^7.2.0",
     "@mui/material": "^7.2.0",
     "@mui/x-charts": "^8.9.0",
@@ -22,7 +23,9 @@
     "dayjs": "^1.11.13",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.2"
+    "react-hook-form": "^7.62.0",
+    "react-router-dom": "^7.6.2",
+    "yup": "^1.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
