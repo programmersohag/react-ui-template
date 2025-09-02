@@ -11,6 +11,7 @@ import Form from "../pages/dashboard/Form.tsx";
 import AdvancedTable from "../pages/dashboard/Table.tsx";
 import LoginPage from "../pages/LoginPage.tsx";
 import MultiStepForm from "../pages/MultistepForm.tsx";
+import HomePage from "../pages/HomePage.tsx";
 
 const getUserType = () => localStorage.getItem("userType");
 
@@ -72,6 +73,7 @@ const AppRoutes = () => {
             ]
         },
         {path: "/login", element: <LoginPage/>},
+        {path: "/home", element: <HomePage/>},
         {path: "/unauthorized", element: <UnauthorizedPage/>},
         {path: "*", element: <p>404 Not Found</p>}
     ];
