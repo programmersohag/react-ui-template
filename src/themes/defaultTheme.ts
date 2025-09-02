@@ -1,5 +1,5 @@
-import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import {createTheme} from '@mui/material/styles';
+import {red} from '@mui/material/colors';
 
 const defaultTheme = createTheme({
     palette: {
@@ -23,7 +23,7 @@ const defaultTheme = createTheme({
         MuiAppBar: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#fff', // White app bar
+                    backgroundColor: '#fa4028', // White app bar
                     color: '#333',         // Dark text
                     boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.05)', // Subtle shadow
                 },
@@ -33,7 +33,7 @@ const defaultTheme = createTheme({
             styleOverrides: {
                 paper: {
                     backgroundColor: '#263238', // Dark background for the sidebar
-                    color: '#ffffffde',       // Light text
+                    color: '#ffffff',       // Light text
                 },
             },
         },
@@ -41,7 +41,7 @@ const defaultTheme = createTheme({
             styleOverrides: {
                 root: {
                     '&:hover': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.08)', // Light hover effect
+                        backgroundColor: '#fa4028', // Light hover effect
                     },
                 },
             },
@@ -49,7 +49,7 @@ const defaultTheme = createTheme({
         MuiListItemIcon: {
             styleOverrides: {
                 root: {
-                    color: '#ffffffde', // Light icons
+                    color: '#ffffff', // Light icons
                 },
             },
         },
