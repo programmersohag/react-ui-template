@@ -7,9 +7,9 @@ import defaultTheme from "./themes/defaultTheme.ts";
 function App() {
     return (
         <ThemeProvider theme={defaultTheme}>
-        <BrowserRouter>
-            <AppRoutes/>
-        </BrowserRouter>
+            <BrowserRouter>
+                <AppRoutes/>
+            </BrowserRouter>
         </ThemeProvider>
     )
 }
